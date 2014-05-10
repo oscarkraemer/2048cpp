@@ -10,10 +10,17 @@ int main()
 	
 	//game *g = new game(); 
 	
+	/*
 	game g;
 
 	g.calcDirect();
 	int two =g.one;
 	std::cout << two << std::endl;
+	
+	*/
+
+	Game g;
+	g.startGame();
+	std::cout << "victory" << std::endl;
 	return 0;
 }
