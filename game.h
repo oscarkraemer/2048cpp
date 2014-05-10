@@ -1,17 +1,20 @@
 //using namespace std;
 #include <iostream>
+#include <stdio.h>      /* printf, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 class Game
 {
-	//const
 	int board [4][4] ;//= {0};
+	
 	private:
-		
+		int length;
 
 		int direction;
 		void newBoard();
 
-		void checkIfGameOver();
+		bool checkIfGameOver();
 		void insertNewNumber();
 
 		void moveToRight();
@@ -21,6 +24,7 @@ class Game
 
 		void PrintBoard();
 		void GetDirection();
+		int returnRandomPlate();
 
 	public:
 		void startGame();
