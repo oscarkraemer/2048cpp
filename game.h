@@ -3,6 +3,8 @@
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <math.h> 		/* Power and sqr*/
+#include <unistd.h>		/* Needed to make the random better*/
 
 class Game
 {
@@ -12,7 +14,7 @@ class Game
 		int length;
 
 		int direction;
-		void newBoard();
+		void newBoard(int size);
 
 		bool checkIfGameOver();
 		void insertNewNumber();
@@ -27,7 +29,7 @@ class Game
 		int returnRandomPlate();
 
 	public:
-		void startGame();
+		void startGame(int size);
 
 		//Game();
 //		int one;

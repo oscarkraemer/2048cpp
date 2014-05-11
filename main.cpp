@@ -20,7 +20,7 @@ int main()
 	*/
 
 	Game g;
-	g.startGame();
+	g.startGame(4);
 	std::cout << "victory" << std::endl;
 	return 0;
 }

@@ -22,9 +22,11 @@ void Init()
 	one=1;
 }
 */
-void Game::startGame()
+void Game::startGame(int size)
 {
-	newBoard();
+	this->length= size;
+	newBoard(this->length);
+
 	bool gameEnd = false;
 	do
 	{
@@ -36,18 +38,20 @@ void Game::startGame()
 	while(gameEnd==false);
 }
 
-void Game::newBoard()
+void Game::newBoard(int size)
 {
 
-	for (int i=0; i<4; i++)
+	for (int i=0; i<size; i++)
 	{
-		for (int j=0; j<4; j++)
+		for (int j=0; j<size; j++)
 		{
 			this->board[i][j]=0;
 		}
 	}
-	//TODO: Fix length so it is dynamic
-	this->length = 4;
+
+	//This is not necessary anymore
+	//std::cout << sqrt(sizeof(this->board)/sizeof(int))<< std::endl;
+	//this->length = sqrt(sizeof(this->board)/sizeof(int));
 
 	insertNewNumber();
 	insertNewNumber();
@@ -56,8 +60,12 @@ void Game::newBoard()
 
 int Game::returnRandomPlate()
 {
-	//TODO return a Number by the rules of the game
-	return  2;
+	//TODO Create a better random
+	usleep(500000);
+	srand (time(NULL));
+	int num = rand() % 2 +1;
+	num = pow( 2, num);
+	return  num;
 }
 
 void Game::PrintBoard()
