@@ -34,6 +34,8 @@ void Game::startGame(int size)
 		gameEnd = checkIfGameOver();
 
 		insertNewNumber();
+		Game::moveToLeft();
+
 	}
 	while(gameEnd==false);
 }
@@ -60,7 +62,7 @@ void Game::newBoard(int size)
 
 int Game::returnRandomPlate()
 {
-	//TODO Create a better random
+	//TODO: Create a better random
 	usleep(500000);
 	srand (time(NULL));
 	int num = rand() % 2 +1;
@@ -140,7 +142,64 @@ bool Game::checkIfGameOver()
 	return false;
 }
 
+void Game::executeMove(int horizontal, int verticle)
+{
+	int h_start = 0;
+	int v_start = 0;
 
+	if (horizontal == -1)
+	{
+		h_start = this->length - 1;
+
+	}
+	if (verticle == -1)
+	{
+		v_start = this->length - 1;
+	}
+
+	for (int i = 0; i < this->length; i++)
+	{
+		this->board[h_start][v_start] = this->board[h_start+horizontal][v_start+verticle];
+	}
+}
+
+void Game::moveToLeft()
+{
+	int legt = this->length;
+
+	//Horizontal +1 ==left, -1 ==right, 0== doesn't move
+
+
+	for(int i = 0; i < legt; i++)
+	{
+		for (int j = 0; j < legt; j++)
+		{
+			for (int k = j+1; k < legt; k++)
+			{
+				if (this->board[i][k] == 0)
+				{
+					continue;
+				}
+				else if (this->board[i][j]==this->board[i][k])
+				{
+					this->board[i][j] = 2*this->board[i][j];
+					this->board[i][k] = 0;
+					break;
+				}
+				else if (this->board[i][j]==0)
+				{
+					this->board[i][j] = this->board[i][k];
+					this->board[i][k] = 0;
+					break;
+				}
+				else if (this->board[i][j] != this->board[i][k])
+				{
+					break;
+				}
+			}
+		}
+	}
+}
 
 
 

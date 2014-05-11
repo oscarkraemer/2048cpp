@@ -23,6 +23,7 @@ class Game
 		void moveToLeft();
 		void moveDown();
 		void moveUp();
+		void executeMove(int horizontal, int verticle);
 
 		void PrintBoard();
 		void GetDirection();
