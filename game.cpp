@@ -6,14 +6,18 @@ void Game::startGame(int size)
 	newBoard(this->length);
 
 	bool gameEnd = false;
+	PrintBoard();
 	do
 	{
-		PrintBoard();
-		gameEnd = checkIfGameOver();
-
 		insertNewNumber();
-		moveDirection("down");	//left worked
-
+		gameEnd = checkIfGameOver();
+		string d = input();
+		if (d == "quit")
+		{
+			gameEnd=true;
+		}
+		moveDirection(d);	//left worked
+		PrintBoard();
 	}
 	while(gameEnd==false);
 }
@@ -184,6 +188,48 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y)
 		return false;
 	}
 	return true;
+}
+
+string Game::input()
+{
+	string toReturn = "false";
+  	cout << "Press up, down, left, right or q for quit" << endl; 	// Output prompt 
+  	do{
+  		system("stty raw");   // Set terminal to raw mode 
+  		char input = getchar();// Wait for single character 
+
+  		//cout << "-->" << input << "<--int->" << int(input) <<endl;
+
+  		if (input == 'q'){
+  			toReturn = "quit";
+  		}
+  		//TODO: There should be a correct way to do this
+  		if (int(input)== 27) // If possible arrow key
+  		{
+  			input = getchar();
+  			input = getchar();
+  			switch (int(input))
+  			{
+  				case 65:
+  					toReturn = "up";
+  					break;
+  				case 66:
+  					toReturn = "down";
+  					break;
+  				case 67:
+  					toReturn = "right";
+  					break;
+  				case 68:
+  					toReturn = "left";
+  					break;
+
+  			}
+
+  		}
+  	}while (toReturn=="false");
+  
+  	system("stty cooked"); // Reset terminal to normal "cooked" mode 
+  	return toReturn;
 }
 
 
