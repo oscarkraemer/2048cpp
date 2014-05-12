@@ -15,8 +15,6 @@ class Game
 	private:
 
 		int length; //There is probably a better way
-
-		int direction;
 		void newBoard(int size);
 
 		bool checkIfGameOver(); //Is not finished
@@ -33,6 +31,7 @@ class Game
 		int returnRandomPlate();
 		string input();
 		bool checkIfVictorius();
+		string uniqNumber();
 	public:
 		bool startGame(int size);
 };

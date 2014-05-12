@@ -9,20 +9,37 @@ bool Game::startGame(int size){
 	{
 		insertNewNumber();
 		PrintBoard();
-		gameEnd = checkIfGameOver();
-		string d = input();
-		if (d == "quit")
-		{
-			gameEnd=true;
+		if (checkIfGameOver() == true){
+			break;
 		}
-		moveDirection(d);	//left worked
+		string oldNumber = uniqNumber();
+		while (1){
+			string d = input();
+			if (d == "quit"){
+				gameEnd=true;
+				break;
+			}
+			moveDirection(d);	//left worked
+			if (oldNumber != uniqNumber()){
+				break;
+			}
+		}
 		if (victory==false){
 			victory = checkIfVictorius();
 		}
-		
 	}
 	while(gameEnd==false);
 	return victory; 
+}
+
+string Game::uniqNumber(){
+	string code ="";
+	for (int i=0; i<this->length; i++){
+		for (int j=0; j<this->length; j++){
+			 code.append(std::to_string(this->board[i][j]));		
+		}
+	}
+	return code;
 }
 
 void Game::newBoard(int size){
@@ -150,17 +167,16 @@ bool Game::checkIfGameOver(){
 	int count = 0;
 	for (int i=0; i<this->length; i++)
 	{
-		for (int j=0; j<this->length; j++)
+		for (int j=0; j<this->length-1; j++)
 		{
-			if (this->board[i][j] == 0){
-				count++;
+			if (this->board[i][j] == this->board[i+1][j+1]){
+				return false;
+			}else if (this->board[j][i] == this->board[j+1][i+1]){
+				return false;
 			}
 		}
 	}
-	if (count == (this->length*this->length)){
-		return true;
-	}
-	return false;
+	return true;
 }
 
 void Game::moveDirection(std::string direct){
