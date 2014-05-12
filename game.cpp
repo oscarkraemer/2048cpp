@@ -90,16 +90,30 @@ void Game::PrintBoard(){
 				colour="\033[34m";
 				break;
 			default:
-				colour=" ";
+				colour="\033[37m";
 				break;
 
 			}
+			std::string s = std::to_string(this->board[i][j]);
+			int slen = s.length();
+			switch (slen){
+				case 1:
+					s = "  " + s + " ";
+					break;
+				case 2:
+					s = " " + s + " ";
+					break;
+				case 3:
+					s = s + " ";
+					break;
 
-			std::cout << "| " << colour << this->board[i][j] << "\033[0m";
+			}
+
+			std::cout << "|" << colour << s << "\033[0m";
 		}
 		std::cout << "|" << std::endl;
 	}
-	std::cout << "--------------------------------" << std::endl;
+	std::cout << "---------------------" << std::endl;
 }
 
 //TODO: Are there a for each element in an array?
