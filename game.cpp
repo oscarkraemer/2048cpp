@@ -12,7 +12,7 @@ void Game::startGame(int size)
 		gameEnd = checkIfGameOver();
 
 		insertNewNumber();
-		moveDirection("left");	//left worked
+		moveDirection("down");	//left worked
 
 	}
 	while(gameEnd==false);
@@ -120,43 +120,6 @@ bool Game::checkIfGameOver()
 	return false;
 }
 
-void Game::moveToLeft()
-{
-	int legt = this->length;
-
-	//Horizontal +1 ==left, -1 ==right, 0== doesn't move
-
-
-	for(int i = 0; i < legt; i++)
-	{
-		for (int j = 0; j < legt; j++)
-		{
-			for (int k = j+1; k < legt; k++)
-			{
-				if (this->board[i][k] == 0)
-				{
-					continue;
-				}
-				else if (this->board[i][j]==this->board[i][k])
-				{
-					this->board[i][j] = 2*this->board[i][j];
-					this->board[i][k] = 0;
-					break;
-				}
-				else if (this->board[i][j]==0)
-				{
-					this->board[i][j] = this->board[i][k];
-					this->board[i][k] = 0;
-					break;
-				}
-				else if (this->board[i][j] != this->board[i][k])
-				{
-					break;
-				}
-			}
-		}
-	}
-}
 void Game::moveDirection(std::string direct)
 {
 	int legt = this->length;
@@ -177,12 +140,12 @@ void Game::moveDirection(std::string direct)
 				{
 					contin = executeMove(i,legt-1-j,i,legt-1-k);
 				}
-				else if(direct=="down")
+				else if(direct=="up")
 				{
-					contin = executeMove(j,i,j,k);
+					contin = executeMove(j,i,k,i);
 				}
 
-				else if(direct=="up")
+				else if(direct=="down")
 				{
 					contin = executeMove(legt-1-j, i, legt-1-k, i);
 				}
