@@ -1,16 +1,10 @@
 //using namespace std;
 #include <iostream>
-
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <math.h> 		/* Power and sqr*/
-#include <unistd.h>		/* Needed to make the random better*/
 #include <string>		/* String parameter in movedirection*/
-//#include <curses.h>
-//#include <conio.h>
-//#include <unistd.h>
-//#include <termios.h>
 
 using namespace std;
 
@@ -41,10 +35,4 @@ class Game
 		bool checkIfVictorius();
 	public:
 		bool startGame(int size);
-
-		//Game();
-//		int one;
-//		int two;	
-//		int GetDirection() { return direction; }
-//		void calcDirect();
 };

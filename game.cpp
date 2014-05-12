@@ -31,19 +31,11 @@ void Game::newBoard(int size){
 			this->board[i][j]=0;
 		}
 	}
-
-	//This is not necessary anymore
-	//std::cout << sqrt(sizeof(this->board)/sizeof(int))<< std::endl;
-	//this->length = sqrt(sizeof(this->board)/sizeof(int));
-
-	insertNewNumber();
-	insertNewNumber();
 	insertNewNumber();
 }
 
 int Game::returnRandomPlate(){
 	//TODO: Create a better random
-	usleep(100000);
 	srand (time(NULL));
 	int num = rand() % 2 +1;
 	num = pow( 2, num);
