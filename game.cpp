@@ -181,10 +181,9 @@ bool Game::checkIfGameOver(){
 		{
 			if (this->board[i][j]==0){
 				return false;
-			}
-			if (this->board[i][j] == this->board[i+1][j+1]){
+			}else if (this->board[i][j] == this->board[i][j+1]){
 				return false;
-			}else if (this->board[j][i] == this->board[j+1][i+1]){
+			}else if (this->board[j][i] == this->board[j+1][i]){
 				return false;
 			}
 		}
