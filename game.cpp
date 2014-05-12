@@ -8,13 +8,15 @@ bool Game::startGame(int size){
 	do
 	{
 		insertNewNumber();
-		PrintBoard();
 		if (checkIfGameOver() == true){
 			break;
 		}
 		string oldNumber = uniqNumber();
+
+		string message = "Press up, down, left, right or q for quit";
 		while (1){
-			string d = input();
+			PrintBoard();
+			string d = input(message);
 			if (d == "quit"){
 				gameEnd=true;
 				break;
@@ -23,12 +25,14 @@ bool Game::startGame(int size){
 			if (oldNumber != uniqNumber()){
 				break;
 			}
+			message = "You can't go there, try another button or q for quit";
 		}
 		if (victory==false){
 			victory = checkIfVictorius();
 		}
 	}
 	while(gameEnd==false);
+	PrintBoard();
 	return victory; 
 }
 
@@ -60,6 +64,12 @@ int Game::returnRandomPlate(){
 }
 
 void Game::PrintBoard(){
+	clearScreen();
+	string head = "-";
+	for (int i=0; i < this->length; i++){
+		head.append("-----");
+	}
+	std::cout << head << std::endl;
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
 
@@ -90,7 +100,7 @@ void Game::PrintBoard(){
 		}
 		std::cout << "|" << std::endl;
 	}
-	std::cout << "---------------------" << std::endl;
+	std::cout << head << std::endl;
 }
 
 string Game::getColourString(int num)
@@ -220,9 +230,9 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 	return true;
 }
 
-string Game::input(){
+string Game::input(string mess){
 	string toReturn = "false";
-  	cout << "Press up, down, left, right or q for quit" << endl; 	// Output prompt 
+  	cout << mess << endl; 	// Output prompt 
   	do{
   		system("stty raw");   	// Set terminal to raw mode 
   		char input = getchar();	// Wait for single character 
@@ -265,4 +275,9 @@ bool Game::checkIfVictorius(){
 	return false;
 }
 
+void Game::clearScreen()
+{
+	//I have no idea if this is a good way to do it.
+	printf("\033[2J");
+}
 

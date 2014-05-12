@@ -6,6 +6,8 @@
 #include <math.h> 		/* Power and sqr*/
 #include <string>		/* String parameter in movedirection*/
 
+
+
 using namespace std;
 
 class Game
@@ -29,9 +31,10 @@ class Game
 		string getColourString(int num);
 
 		int returnRandomPlate();
-		string input();
+		string input(string mess);
 		bool checkIfVictorius();
 		string uniqNumber();
+		void clearScreen();
 	public:
 		bool startGame(int size);
 };
