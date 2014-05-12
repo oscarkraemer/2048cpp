@@ -1,11 +1,10 @@
 #include "game.h"
 
-void Game::startGame(int size){
+bool Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
-
 	bool gameEnd = false;
-	PrintBoard();
+	bool victory = false;
 	do
 	{
 		insertNewNumber();
@@ -17,8 +16,13 @@ void Game::startGame(int size){
 			gameEnd=true;
 		}
 		moveDirection(d);	//left worked
+		if (victory==false){
+			victory = checkIfVictorius();
+		}
+		
 	}
 	while(gameEnd==false);
+	return victory; 
 }
 
 void Game::newBoard(int size){
@@ -39,7 +43,7 @@ void Game::newBoard(int size){
 
 int Game::returnRandomPlate(){
 	//TODO: Create a better random
-	usleep(500000);
+	usleep(100000);
 	srand (time(NULL));
 	int num = rand() % 2 +1;
 	num = pow( 2, num);
@@ -85,22 +89,22 @@ string Game::getColourString(int num)
 	string colour;
 	switch (num){
 	case 2:
-		colour="\033[31m";
+		colour="\033[31m";	//RED
 		break;
 	case 4:
-		colour="\033[32m";
+		colour="\033[32m";	//GREEN
 		break;
 	case 8:
-		colour="\033[33m";
+		colour="\033[33m";	//BLUE
 		break;
 	case 16:
-		colour="\033[34m";
+		colour="\033[34m";	//PINK
 		break;	
 	case 32:
-		colour="\033[35m";
+		colour="\033[35m";	//LIGHT BLUE
 		break;
 	case 64:
-		colour="\033[36m";
+		colour="\033[36m";	//WHITE
 		break;
 	case 128:
 		colour="\033[37m";
@@ -241,6 +245,16 @@ string Game::input(){
   
   	system("stty cooked"); 	// Reset terminal to normal "cooked" mode 
   	return toReturn;
+}
+bool Game::checkIfVictorius(){
+	for(int i = 0; i < this->length; i++){
+		for (int j = 0; j < this->length; j++){
+			if (this->board[i][j]==2048){
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 

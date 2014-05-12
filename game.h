@@ -19,7 +19,8 @@ class Game
 	int board [4][4] ;//= {0};
 	
 	private:
-		int length;
+
+		int length; //There is probably a better way
 
 		int direction;
 		void newBoard(int size);
@@ -37,8 +38,9 @@ class Game
 
 		int returnRandomPlate();
 		string input();
+		bool checkIfVictorius();
 	public:
-		void startGame(int size);
+		bool startGame(int size);
 
 		//Game();
 //		int one;

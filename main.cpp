@@ -5,22 +5,14 @@
 //Game * g = 0;
 int main()
 {
-	std::cout << "Hello World!" << std::endl;
-	//printf("hello World");
-	
-	//game *g = new game(); 
-	
-	/*
-	game g;
-
-	g.calcDirect();
-	int two =g.one;
-	std::cout << two << std::endl;
-	
-	*/
-
+	std::cout << "Welcome to 2048 written in C++" << std::endl;
 	Game g;
-	g.startGame(4);
-	std::cout << "victory" << std::endl;
+	bool victory = g.startGame(4);
+	if (victory==true){
+		std::cout << "Victory!" << std::endl;
+	}
+	else{
+		std::cout << "You are a looser!" << std::endl;
+	}
 	return 0;
 }
