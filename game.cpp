@@ -1,27 +1,5 @@
 #include "game.h"
-//using namespace std;
-/**
 
-Game::Game(): one("")
-{
-}
-*/
-
-/*
-void game::calcDirect()
-{
-	one = 1;
-    two = 2;	
-    direction = one + two;
-}
-
-*/
-/*
-void Init()
-{
-	one=1;
-}
-*/
 void Game::startGame(int size)
 {
 	this->length= size;
@@ -141,28 +119,6 @@ bool Game::checkIfGameOver()
 	}
 	return false;
 }
-/*
-void Game::executeMove(int horizontal, int verticle)
-{
-	int h_start = 0;
-	int v_start = 0;
-
-	if (horizontal == -1)
-	{
-		h_start = this->length - 1;
-
-	}
-	if (verticle == -1)
-	{
-		v_start = this->length - 1;
-	}
-
-	for (int i = 0; i < this->length; i++)
-	{
-		this->board[h_start][v_start] = this->board[h_start+horizontal][v_start+verticle];
-	}
-}
-*/
 
 void Game::moveToLeft()
 {
@@ -231,23 +187,6 @@ void Game::moveDirection(std::string direct)
 					contin = executeMove(legt-1-j, i, legt-1-k, i);
 				}
 
-				/*
-				switch (direct)
-				{
-					case 'down':
-						contin = executeMove(j,i,j,k); //Down
-						break;
-					case 'left':
-						contin = executeMove(i,j,i,k); //Left
-						break;
-					case 'right':
-						contin = executeMove(i,legt-j,i,legt-k)
-						break;
-					case 'up' :
-						contin = executeMove(legt-j, i, legt-k, i);
-						break;
-				}
-				*/
 				if(contin==false)
 				{
 					break;
@@ -257,7 +196,7 @@ void Game::moveDirection(std::string direct)
 	}
 }
 
-//false==continue true==break
+//true==continue false==break
 bool Game::executeMove(int start_x , int start_y, int check_x , int check_y)
 {
 
