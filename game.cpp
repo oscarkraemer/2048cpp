@@ -34,7 +34,7 @@ void Game::startGame(int size)
 		gameEnd = checkIfGameOver();
 
 		insertNewNumber();
-		Game::moveToLeft();
+		moveDirection("left");	//left worked
 
 	}
 	while(gameEnd==false);
@@ -141,7 +141,7 @@ bool Game::checkIfGameOver()
 	}
 	return false;
 }
-
+/*
 void Game::executeMove(int horizontal, int verticle)
 {
 	int h_start = 0;
@@ -162,6 +162,7 @@ void Game::executeMove(int horizontal, int verticle)
 		this->board[h_start][v_start] = this->board[h_start+horizontal][v_start+verticle];
 	}
 }
+*/
 
 void Game::moveToLeft()
 {
@@ -200,6 +201,87 @@ void Game::moveToLeft()
 		}
 	}
 }
+void Game::moveDirection(std::string direct)
+{
+	int legt = this->length;
 
+	//Horizontal +1 ==left, -1 ==right, 0== doesn't move
+	for(int i = 0; i < legt; i++)
+	{
+		for (int j = 0; j < legt; j++)
+		{
+			for (int k = j+1; k < legt; k++)
+			{
+				bool contin =false;
+				if(direct=="left")
+				{
+					contin = executeMove(i,j,i,k);
+				}
+				else if(direct=="right")
+				{
+					contin = executeMove(i,legt-1-j,i,legt-1-k);
+				}
+				else if(direct=="down")
+				{
+					contin = executeMove(j,i,j,k);
+				}
+
+				else if(direct=="up")
+				{
+					contin = executeMove(legt-1-j, i, legt-1-k, i);
+				}
+
+				/*
+				switch (direct)
+				{
+					case 'down':
+						contin = executeMove(j,i,j,k); //Down
+						break;
+					case 'left':
+						contin = executeMove(i,j,i,k); //Left
+						break;
+					case 'right':
+						contin = executeMove(i,legt-j,i,legt-k)
+						break;
+					case 'up' :
+						contin = executeMove(legt-j, i, legt-k, i);
+						break;
+				}
+				*/
+				if(contin==false)
+				{
+					break;
+				}
+			}
+		}
+	}
+}
+
+//false==continue true==break
+bool Game::executeMove(int start_x , int start_y, int check_x , int check_y)
+{
+
+	if (this->board[check_x][check_y] == 0)
+	{
+		return true;
+	}
+	else if (this->board[start_x][start_y]==this->board[check_x][check_y])
+	{
+		this->board[start_x][start_y] = 2*this->board[check_x][check_y];
+		this->board[check_x][check_y] = 0;
+		return false;
+	}
+	else if (this->board[start_x][start_y]==0)
+	{
+		this->board[start_x][start_y] = this->board[check_x][check_y];
+		this->board[check_x][check_y] = 0;
+		return false;
+	}
+	else if (this->board[start_x][start_y] != this->board[check_x][check_y])
+	{
+		return false;
+	}
+	return true;
+}
 
 

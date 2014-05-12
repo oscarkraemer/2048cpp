@@ -5,6 +5,7 @@
 #include <time.h>       /* time */
 #include <math.h> 		/* Power and sqr*/
 #include <unistd.h>		/* Needed to make the random better*/
+#include <string>		/* String parameter in movedirection*/
 
 class Game
 {
@@ -23,7 +24,8 @@ class Game
 		void moveToLeft();
 		void moveDown();
 		void moveUp();
-		void executeMove(int horizontal, int verticle);
+		bool executeMove(int start_x , int start_y, int check_x , int check_y);
+		void moveDirection(std::string direct);
 
 		void PrintBoard();
 		void GetDirection();
