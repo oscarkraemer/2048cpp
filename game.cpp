@@ -51,49 +51,11 @@ void Game::PrintBoard(){
 		for (int j=0; j<this->length; j++){
 
 			//COLOUR:
-			std::string colour =" ";
+			std::string colour = getColourString(this->board[i][j]);
 
 			//You should check out this link 
 			// http://stackoverflow.com/questions/9158150/colored-output-in-c
-			switch (int(this->board[i][j])){
-			case 2:
-				colour="\033[31m";
-				break;
-			case 4:
-				colour="\033[32m";
-				break;
-			case 8:
-				colour="\033[33m";
-				break;
-			case 16:
-				colour="\033[34m";
-				break;	
-			case 32:
-				colour="\033[35m";
-				break;
-			case 64:
-				colour="\033[36m";
-				break;
-			case 128:
-				colour="\033[37m";
-				break;
-			case 256:
-				colour="\033[31m";
-				break;
-			case 512:
-				colour="\033[32m";
-				break;
-			case 1024:
-				colour="\033[33m";
-				break;
-			case 2048:
-				colour="\033[34m";
-				break;
-			default:
-				colour="\033[37m";
-				break;
 
-			}
 			std::string s = std::to_string(this->board[i][j]);
 			int slen = s.length();
 			switch (slen){
@@ -106,7 +68,9 @@ void Game::PrintBoard(){
 				case 3:
 					s = s + " ";
 					break;
-
+			}
+			if(this->board[i][j]==0){
+				s="    ";
 			}
 
 			std::cout << "|" << colour << s << "\033[0m";
@@ -115,6 +79,51 @@ void Game::PrintBoard(){
 	}
 	std::cout << "---------------------" << std::endl;
 }
+
+string Game::getColourString(int num)
+{
+	string colour;
+	switch (num){
+	case 2:
+		colour="\033[31m";
+		break;
+	case 4:
+		colour="\033[32m";
+		break;
+	case 8:
+		colour="\033[33m";
+		break;
+	case 16:
+		colour="\033[34m";
+		break;	
+	case 32:
+		colour="\033[35m";
+		break;
+	case 64:
+		colour="\033[36m";
+		break;
+	case 128:
+		colour="\033[37m";
+		break;
+	case 256:
+		colour="\033[31m";
+		break;
+	case 512:
+		colour="\033[32m";
+		break;
+	case 1024:
+		colour="\033[33m";
+		break;
+	case 2048:
+		colour="\033[34m";
+		break;
+	default:
+		colour="\033[37m";
+		break;
+	}
+	return colour;
+}
+
 
 //TODO: Are there a for each element in an array?
 void Game::insertNewNumber(){

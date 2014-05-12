@@ -33,6 +33,8 @@ class Game
 		
 
 		void PrintBoard();
+		string getColourString(int num);
+
 		int returnRandomPlate();
 		string input();
 	public:
