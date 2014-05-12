@@ -9,6 +9,7 @@ void Game::startGame(int size){
 	do
 	{
 		insertNewNumber();
+		PrintBoard();
 		gameEnd = checkIfGameOver();
 		string d = input();
 		if (d == "quit")
@@ -16,7 +17,6 @@ void Game::startGame(int size){
 			gameEnd=true;
 		}
 		moveDirection(d);	//left worked
-		PrintBoard();
 	}
 	while(gameEnd==false);
 }
@@ -132,7 +132,7 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 	}else if (this->board[start_x][start_y]==0){
 		this->board[start_x][start_y] = this->board[check_x][check_y];
 		this->board[check_x][check_y] = 0;
-		return false;
+		return true;
 	}else if (this->board[start_x][start_y] != this->board[check_x][check_y]) {
 		return false;
 	}
