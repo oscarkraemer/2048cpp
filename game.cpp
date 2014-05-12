@@ -49,7 +49,53 @@ int Game::returnRandomPlate(){
 void Game::PrintBoard(){
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
-			std::cout << "| " << this->board[i][j] << " " ;
+
+			//COLOUR:
+			std::string colour =" ";
+
+			//You should check out this link 
+			// http://stackoverflow.com/questions/9158150/colored-output-in-c
+			switch (int(this->board[i][j])){
+			case 2:
+				colour="\033[31m";
+				break;
+			case 4:
+				colour="\033[32m";
+				break;
+			case 8:
+				colour="\033[33m";
+				break;
+			case 16:
+				colour="\033[34m";
+				break;	
+			case 32:
+				colour="\033[35m";
+				break;
+			case 64:
+				colour="\033[36m";
+				break;
+			case 128:
+				colour="\033[37m";
+				break;
+			case 256:
+				colour="\033[31m";
+				break;
+			case 512:
+				colour="\033[32m";
+				break;
+			case 1024:
+				colour="\033[33m";
+				break;
+			case 2048:
+				colour="\033[34m";
+				break;
+			default:
+				colour=" ";
+				break;
+
+			}
+
+			std::cout << "| " << colour << this->board[i][j] << "\033[0m";
 		}
 		std::cout << "|" << std::endl;
 	}

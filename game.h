@@ -24,14 +24,15 @@ class Game
 		int direction;
 		void newBoard(int size);
 
-		bool checkIfGameOver();
+		bool checkIfGameOver(); //Is not finished
 		void insertNewNumber();
-
-		bool executeMove(int start_x , int start_y, int check_x , int check_y);
+		
+		//Move direction and execute move works together
 		void moveDirection(std::string direct);
+		bool executeMove(int start_x , int start_y, int check_x , int check_y);
+		
 
 		void PrintBoard();
-		void GetDirection();
 		int returnRandomPlate();
 		string input();
 	public:
