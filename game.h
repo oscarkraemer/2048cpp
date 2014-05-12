@@ -12,7 +12,7 @@ using namespace std;
 
 class Game
 {
-	int board [4][4] ;//= {0};
+	int board [4][4] ;
 	
 	private:
 
@@ -21,20 +21,19 @@ class Game
 
 		bool checkIfGameOver(); //Is not finished
 		void insertNewNumber();
-		
 		//Move direction and execute move works together
 		void moveDirection(std::string direct);
 		bool executeMove(int start_x , int start_y, int check_x , int check_y);
-		
 
 		void PrintBoard();
 		string getColourString(int num);
+		void clearScreen();
 
 		int returnRandomPlate();
 		string input(string mess);
 		bool checkIfVictorius();
 		string uniqNumber();
-		void clearScreen();
+
 	public:
 		bool startGame(int size);
 };

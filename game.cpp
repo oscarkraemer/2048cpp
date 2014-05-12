@@ -232,7 +232,7 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 
 string Game::input(string mess){
 	string toReturn = "false";
-  	cout << mess << endl; 	// Output prompt 
+  	std::cout << mess << std::endl; 	// Output prompt 
   	do{
   		system("stty raw");   	// Set terminal to raw mode 
   		char input = getchar();	// Wait for single character 
@@ -258,6 +258,9 @@ string Game::input(string mess){
 				toReturn = "left";
 				break;
 			}
+		}
+		if (input == 't'){
+			std::cout << "I'm Oscar Kraemer, I wrote this code, don't tell anybody, sssh." << std::endl;
   		}
   	}while (toReturn=="false");
   
