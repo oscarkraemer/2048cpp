@@ -3,7 +3,7 @@
 
 2048 game, my first C++ Application
 
-compile: g++ game.cpp main.cpp -o spel -lcurses
+compile: g++ game.cpp main.cpp -lcurses -o 2048
 
 Made for OSX 10.9
 
