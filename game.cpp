@@ -174,19 +174,27 @@ void Game::insertNewNumber(){
 }
 
 bool Game::checkIfGameOver(){
-	int count = 0;
+	for (int i=0; i<this->length; i++)
+	{
+		for (int j=0; j<this->length; j++)
+		{
+			if (this->board[i][j]==0){
+				return false;
+			}
+		}
+	}
+
 	for (int i=0; i<this->length; i++)
 	{
 		for (int j=0; j<this->length-1; j++)
 		{
-			if (this->board[i][j]==0){
-				return false;
-			}else if (this->board[i][j] == this->board[i][j+1]){
+			if (this->board[i][j] == this->board[i][j+1]){
 				return false;
 			}else if (this->board[j][i] == this->board[j+1][i]){
 				return false;
 			}
 		}
+
 	}
 	return true;
 }
