@@ -3,7 +3,6 @@
 bool Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
-	printf("hello");
 	bool gameEnd = false;
 	bool victory = false;
 	do
@@ -12,7 +11,7 @@ bool Game::startGame(int size){
 		if (checkIfGameOver() == true){
 			break;
 		}
-		string oldNumber = uniqNumber();
+		string oldNumber = uniqNumber();// This is used to check if a board move have been made.
 
 		string message = "Press up, down, left, right or q for quit";
 		while (1){
@@ -28,15 +27,18 @@ bool Game::startGame(int size){
 			}
 			message = "You can't go there, try another button or q for quit";
 		}
-		if (victory==false){
-			victory = checkIfVictorius();
-		}
 	}
 	while(gameEnd==false);
+
+	if (victory==false){
+		victory = checkIfVictorius();
+	}
+
 	PrintBoard();
 	return victory; 
 }
 
+// Creates uniq number for the board state. There is probably a clearer way to do this
 string Game::uniqNumber(){
 	string code ="";
 	for (int i=0; i<this->length; i++){
@@ -255,7 +257,7 @@ string Game::input(string mess){
   		if (input == 'q'){
   			toReturn = "quit";
   		}
-  		//TODO: There should be a correct way to do this
+  		//TODO: There should be a better way to do this
   		if (int(input)== 27){ 	// If possible arrow key
   			input = getchar();
   			input = getchar();
