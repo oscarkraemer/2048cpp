@@ -14,10 +14,11 @@ bool Game::startGame(int size){
 		string oldNumber = uniqNumber();// This is used to check if a board move have been made.
 
 		string message = "Press up, down, left, right or q for quit";
+		int d = NOT_SET;
 		while (1){
 			PrintBoard();
-			string d = input(message);
-			if (d == "quit"){
+			d = input(message);
+			if (d == QUIT){
 				gameEnd=true;
 				break;
 			}
@@ -206,20 +207,20 @@ bool Game::checkIfGameOver(){
 	return true;
 }
 
-void Game::moveDirection(std::string direct){
+void Game::moveDirection(int direct){
 	int legt = this->length;
 	//Horizontal +1 ==left, -1 ==right, 0== doesn't move
 	for(int i = 0; i < legt; i++){
 		for (int j = 0; j < legt; j++){
 			for (int k = j+1; k < legt; k++){
 				bool contin =false;
-				if(direct=="left"){
+				if(direct==LEFT){
 					contin = executeMove(i,j,i,k);
-				}else if(direct=="right"){
+				}else if(direct==RIGHT){
 					contin = executeMove(i,legt-1-j,i,legt-1-k);
-				}else if(direct=="up"){
+				}else if(direct==UP){
 					contin = executeMove(j,i,k,i);
-				}else if(direct=="down"){
+				}else if(direct==DOWN){
 					contin = executeMove(legt-1-j, i, legt-1-k, i);
 				}
 				if(contin==false)
@@ -247,15 +248,15 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 	return true;
 }
 
-string Game::input(string mess){
-	string toReturn = "false";
+int Game::input(string mess){
+	int toReturn = NOT_SET;
   	std::cout << mess << std::endl; 	// Output prompt 
   	do{
   		system("stty raw");   	// Set terminal to raw mode 
   		char input = getchar();	// Wait for single character 
   		//cout << "-->" << input << "<--int->" << int(input) <<endl;
   		if (input == 'q'){
-  			toReturn = "quit";
+  			toReturn = QUIT;
   		}
   		//TODO: There should be a better way to do this
   		if (int(input)== 27){ 	// If possible arrow key
@@ -263,23 +264,23 @@ string Game::input(string mess){
   			input = getchar();
   			switch (int(input)){
 			case 65:
-				toReturn = "up";
+				toReturn = UP;
 				break;
 			case 66:
-				toReturn = "down";
+				toReturn = DOWN;
 				break;
 			case 67:
-				toReturn = "right";
+				toReturn = RIGHT;
 				break;
 			case 68:
-				toReturn = "left";
+				toReturn = LEFT;
 				break;
 			}
 		}
 		if (input == 't'){
 			std::cout << "I'm Oscar Kraemer, I wrote this code, don't tell anybody, sssh." << std::endl;
   		}
-  	}while (toReturn=="false");
+  	}while (toReturn==NOT_SET);
   
   	system("stty cooked"); 	// Reset terminal to normal "cooked" mode 
   	return toReturn;
@@ -287,7 +288,7 @@ string Game::input(string mess){
 bool Game::checkIfVictorius(){
 	for(int i = 0; i < this->length; i++){
 		for (int j = 0; j < this->length; j++){
-			if (this->board[i][j]==2048){
+			if (this->board[i][j]>=WINNING_INT){
 				return true;
 			}
 		}

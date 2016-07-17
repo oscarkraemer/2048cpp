@@ -1,4 +1,13 @@
 //using namespace std;
+#define NOT_SET 0
+#define QUIT 1
+#define LEFT 10
+#define RIGHT 11
+#define UP 12
+#define DOWN 13
+#define WINNING_INT 16 //The default value could be 2048
+
+
 #include <iostream>
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -22,7 +31,7 @@ class Game
 		bool checkIfGameOver(); //Is not finished
 		void insertNewNumber();
 		//Move direction and execute move works together
-		void moveDirection(std::string direct);
+		void moveDirection(int direct);
 		bool executeMove(int start_x , int start_y, int check_x , int check_y);
 
 		void PrintBoard();
@@ -30,7 +39,7 @@ class Game
 		void clearScreen();
 
 		int returnRandomPlate();
-		string input(string mess);
+		int input(string mess);
 		bool checkIfVictorius();
 		string uniqNumber();
 
