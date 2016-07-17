@@ -7,7 +7,7 @@ int main()
 {
 	std::cout << "Welcome to 2048 written in C++" << std::endl;
 	Game g;
-	bool victory = g.startGame(4);
+	bool victory = g.startGame(7);
 	if (victory==true){
 		std::cout << "Victory!" << std::endl;
 	}

@@ -12,7 +12,7 @@ using namespace std;
 
 class Game
 {
-	int board [4][4] ;
+	int** board;
 	
 	private:
 

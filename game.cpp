@@ -3,6 +3,7 @@
 bool Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
+	printf("hello");
 	bool gameEnd = false;
 	bool victory = false;
 	do
@@ -47,7 +48,11 @@ string Game::uniqNumber(){
 }
 
 void Game::newBoard(int size){
+	
+	board = new int*[size];
+
 	for (int i=0; i<size; i++){
+		board[i] = new int[size];
 		for (int j=0; j<size; j++){
 			this->board[i][j]=0;
 		}
@@ -290,7 +295,7 @@ bool Game::checkIfVictorius(){
 
 void Game::clearScreen()
 {
-	//I have no idea if this is a good way to do it.
-	printf("\033[2J");
+	//I have no idea if this is a good way to do it. I added '\n' to the end to make sure the row start at the frame.
+	printf("\033[2J\n");
 }
 
