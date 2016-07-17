@@ -1,5 +1,6 @@
 #include "game.h"
 
+//
 bool Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
@@ -30,10 +31,7 @@ bool Game::startGame(int size){
 		}
 	}
 	while(gameEnd==false);
-
-	if (victory==false){
-		victory = checkIfVictorius();
-	}
+	victory = checkIfVictorius();
 
 	PrintBoard();
 	return victory; 
@@ -289,6 +287,7 @@ bool Game::checkIfVictorius(){
 	for(int i = 0; i < this->length; i++){
 		for (int j = 0; j < this->length; j++){
 			if (this->board[i][j]>=WINNING_INT){
+
 				return true;
 			}
 		}

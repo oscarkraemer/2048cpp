@@ -4,4 +4,4 @@ $CPPFLAGS= #-lcurses
 main.o: main.cpp
 	g++ $(CPPFLAGS) -c main.cpp 
 game.o: game.cpp game.h
-	g++ $(CPPFLAGS) -c game.cpp 
+	g++ $(CPPFLAGS) -c game.cpp

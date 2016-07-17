@@ -5,15 +5,14 @@
 #define RIGHT 11
 #define UP 12
 #define DOWN 13
-#define WINNING_INT 16 //The default value could be 2048
-
+#define WINNING_INT 2048 //The default value could be 2048
 
 #include <iostream>
-#include <stdio.h>      /* printf, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <math.h> 		/* Power and sqr*/
-#include <string>		/* String parameter in movedirection*/
+#include <stdio.h>      // printf, NULL 
+#include <stdlib.h>     // srand, rand 
+#include <time.h>       // time 
+#include <math.h> 	// Power and sqr
+#include <string>	
 
 
 
