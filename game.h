@@ -7,8 +7,8 @@
 #define DOWN 13
 #define WINNING_INT 2048 //The default value could be 2048
 
-#include <iostream>
 #include <stdio.h>      // printf, NULL 
+#include <iostream>
 #include <stdlib.h>     // srand, rand 
 #include <time.h>       // time 
 #include <math.h> 	// Power and sqr

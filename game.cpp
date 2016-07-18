@@ -1,6 +1,5 @@
 #include "game.h"
-
-//
+#define SECRET_MESSAGE helloworld
 bool Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
@@ -42,7 +41,7 @@ string Game::uniqNumber(){
 	string code ="";
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
-			 code.append(std::to_string(this->board[i][j]));		
+			 code.append(to_string(this->board[i][j]));		
 		}
 	}
 	return code;
@@ -75,17 +74,17 @@ void Game::PrintBoard(){
 	for (int i=0; i < this->length; i++){
 		head.append("-----");
 	}
-	std::cout << head << std::endl;
+	cout << head << endl;
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
 
 			//COLOUR:
-			std::string colour = getColourString(this->board[i][j]);
+			string colour = getColourString(this->board[i][j]);
 
 			//You should check out this link 
 			// http://stackoverflow.com/questions/9158150/colored-output-in-c
 
-			std::string s = std::to_string(this->board[i][j]);
+			string s = to_string(this->board[i][j]);
 			int slen = s.length();
 			switch (slen){
 				case 1:
@@ -102,11 +101,11 @@ void Game::PrintBoard(){
 				s="    ";
 			}
 
-			std::cout << "|" << colour << s << "\033[0m";
+			cout << "|" << colour << s << "\033[0m";
 		}
-		std::cout << "|" << std::endl;
+		cout << "|" << endl;
 	}
-	std::cout << head << std::endl;
+	cout << head << endl;
 }
 
 string Game::getColourString(int num)
@@ -248,7 +247,7 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 
 int Game::input(string mess){
 	int toReturn = NOT_SET;
-  	std::cout << mess << std::endl; 	// Output prompt 
+  	cout << mess << endl; 	// Output prompt 
   	do{
   		system("stty raw");   	// Set terminal to raw mode 
   		char input = getchar();	// Wait for single character 
@@ -276,7 +275,7 @@ int Game::input(string mess){
 			}
 		}
 		if (input == 't'){
-			std::cout << "I'm Oscar Kraemer, I wrote this code, don't tell anybody, sssh." << std::endl;
+			cout << "\nI'm Oscar, I wrote this code, don't tell anybody, sssh." << endl;
   		}
   	}while (toReturn==NOT_SET);
   
