@@ -38,4 +38,4 @@ int Getpage::main(int argi, char* url_string[])
   std::cout << ans << std::endl;
   return 0;
 }
-   
+
