@@ -1,6 +1,8 @@
 #define STANDARD_SIZE 4
-
+#define ONLINE_ENABLED true
+#include "standard.h"
 #include "game.h"
+#include "getpage.h"
 #include <stdio.h>
 
 int main(int argc, char* argv[])
@@ -15,12 +17,23 @@ int main(int argc, char* argv[])
 		}										 
 	}
 	Game g;
-	bool victory = g.startGame(size);
-	if (victory==true){
+	int result = g.startGame(size);
+	if (result>=WINNING_INT){
 		std::cout << "Victory!" << std::endl;
 	}
 	else{
 		std::cout << "You are a looser!" << std::endl;
 	}
+#ifdef ONLINE_ENABLED 
+        Getpage p;
+        string value = to_string(result);
+        string post = "points=";
+	post.append(value);
+        post.append("&timestamp=zero");
+//        string post = "points=0&timestamp=zero";      
+	char url[] = STANDARD_URL;
+        string a = p.request_page(url , &post);
+        std::cout << a << std::endl;
+#endif
 	return 0;
 }

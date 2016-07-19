@@ -1,10 +1,10 @@
 #include "game.h"
 #define SECRET_MESSAGE helloworld
-bool Game::startGame(int size){
+int Game::startGame(int size){
 	this->length= size;
 	newBoard(this->length);
 	bool gameEnd = false;
-	bool victory = false;
+//	bool victory = false;
 	do
 	{
 		insertNewNumber();
@@ -30,10 +30,10 @@ bool Game::startGame(int size){
 		}
 	}
 	while(gameEnd==false);
-	victory = checkIfVictorius();
+//	victory = checkIfVictorius();
 
 	PrintBoard();
-	return victory; 
+	return returnHighestNumber(); 
 }
 
 // Creates uniq number for the board state. There is probably a clearer way to do this
@@ -286,15 +286,22 @@ int Game::input(string mess){
   	return toReturn;
 }
 bool Game::checkIfVictorius(){
+	if (returnHighestNumber() >= WINNING_INT){
+		return true;
+	}else {
+		return false;
+	}
+}
+int Game::returnHighestNumber(){
+	int highest = 0;
 	for(int i = 0; i < this->length; i++){
 		for (int j = 0; j < this->length; j++){
-			if (this->board[i][j]>=WINNING_INT){
-
-				return true;
+			if (this->board[i][j]>highest){
+				highest = this->board[i][j];
 			}
 		}
 	}
-	return false;
+	return highest;
 }
 
 void Game::clearScreen()
