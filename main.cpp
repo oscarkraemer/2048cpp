@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 	if (argc == 2 && isdigit(*argv[1])){
 		size = atoi (argv[1]) ;
 		if (size < 2){
-			size == STANDARD_SIZE;
+			size = STANDARD_SIZE;
 		}										 
 	}
 	Game g;

@@ -248,8 +248,8 @@ bool Game::executeMove(int start_x , int start_y, int check_x , int check_y){
 int Game::input(string mess){
 	int toReturn = NOT_SET;
   	cout << mess << endl; 	// Output prompt 
+  	system("stty raw");   	// Set terminal to raw mode 
   	do{
-  		system("stty raw");   	// Set terminal to raw mode 
   		char input = getchar();	// Wait for single character 
   		//cout << "-->" << input << "<--int->" << int(input) <<endl;
   		if (input == 'q'){
@@ -275,8 +275,11 @@ int Game::input(string mess){
 			}
 		}
 		if (input == 't'){
-			cout << "\nI'm Oscar, I wrote this code, don't tell anybody, sssh." << endl;
-  		}
+			system("stty cooked");
+			PrintBoard();
+			printf( "I'm Oscar, I wrote this code, don't tell anybody, sssh.\n");	
+		  	system("stty raw");   	// Set terminal to raw mode 
+		}
   	}while (toReturn==NOT_SET);
   
   	system("stty cooked"); 	// Reset terminal to normal "cooked" mode 
@@ -297,6 +300,6 @@ bool Game::checkIfVictorius(){
 void Game::clearScreen()
 {
 	//I have no idea if this is a good way to do it. I added '\n' to the end to make sure the row start at the frame.
-	printf("\033[2J\n");
+	printf("\n\033[2J\n");
 }
 
