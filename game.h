@@ -40,8 +40,9 @@ class Game
 		int returnRandomPlate();
 		int input(string mess);
 		bool checkIfVictorius();
+		int returnHighestNumber();
 		string uniqNumber();
 
 	public:
-		bool startGame(int size);
+		int startGame(int size);
 };
