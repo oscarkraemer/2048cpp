@@ -13,7 +13,7 @@
 #include <time.h>       // time 
 #include <math.h> 	// Power and sqr
 #include <string>	
-
+#include <list>
 
 
 using namespace std;
@@ -21,7 +21,7 @@ using namespace std;
 class Game
 {
 	int** board;
-	
+		
 	private:
 
 		int length; //There is probably a better way
@@ -41,8 +41,9 @@ class Game
 		int input(string mess);
 		bool checkIfVictorius();
 		int returnHighestNumber();
-		string uniqNumber();
+		string uniqString();
 
 	public:
-		int startGame(int size);
+		int startGame(int size, list<string>* history);
+
 };

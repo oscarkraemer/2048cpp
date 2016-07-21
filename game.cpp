@@ -1,6 +1,6 @@
 #include "game.h"
 #define SECRET_MESSAGE helloworld
-int Game::startGame(int size){
+int Game::startGame(int size, list<string>* history){
 	this->length= size;
 	newBoard(this->length);
 	bool gameEnd = false;
@@ -11,7 +11,7 @@ int Game::startGame(int size){
 		if (checkIfGameOver() == true){
 			break;
 		}
-		string oldNumber = uniqNumber();// This is used to check if a board move have been made.
+		string oldString = uniqString();// This is used to check if a board move have been made.
 
 		string message = "Press up, down, left, right or q for quit";
 		int d = NOT_SET;
@@ -23,7 +23,8 @@ int Game::startGame(int size){
 				break;
 			}
 			moveDirection(d);	//left worked
-			if (oldNumber != uniqNumber()){
+			if (oldString != uniqString()){
+				history->push_back(uniqString());
 				break;
 			}
 			message = "You can't go there, try another button or q for quit";
@@ -37,11 +38,12 @@ int Game::startGame(int size){
 }
 
 // Creates uniq number for the board state. There is probably a clearer way to do this
-string Game::uniqNumber(){
+string Game::uniqString(){
 	string code ="";
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
-			 code.append(to_string(this->board[i][j]));		
+			code.append(to_string(this->board[i][j]));
+			code.append("-");		
 		}
 	}
 	return code;
