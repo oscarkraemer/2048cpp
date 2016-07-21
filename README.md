@@ -1,14 +1,17 @@
 2048cpp
 =======
 
-2048 game, my first C++ Application
+2048 game written in C++
 
-compile: g++ game.cpp main.cpp -lcurses -o 2048
+compile: make
 
-gcc 4.6.3 and possibly older:
-g++ -std=c++0x game.cpp main.cpp -o 2048
+To create a 2048 game that post the result to a server:
+Create a header file: standard.h , add following defines with some values:
+* #define STANDARD_URL 
+* #define STANDARD_PREFIX
+Run: make online
 
-Made for OSX 10.9
+This was made for OSX but should work just as fine on any Linux machine.
 
 I hope somebody find it useful or fun.
 
