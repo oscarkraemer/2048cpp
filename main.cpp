@@ -9,14 +9,14 @@
 
 //using namespace std;
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[] )
 {
 
 	string url = STANDARD_URL;
 	int size = STANDARD_SIZE;
 	string name = "place holder";
 	int c; 
-	while ((c = getopt (argc, argv, "tsnuh:")) != -1){
+	while ((c = getopt (argc, argv, "tsnudh:")) != -1){
 		switch (c)
 		{
 		case 't':
@@ -30,8 +30,17 @@ int main(int argc, char* argv[])
 			url = string(optarg);
 			printf("u was pressed");
 		case 'h':
-			printf("this is help");	
-
+			printf("this is help");
+		case 'd':
+		#ifdef ONLINE_ENABLED 
+			const char* on = "Online is enabled";
+		#else
+			const char* on = "Online is disabled";
+		#endif
+ 			// Leson: you can't use '"' around a defined variable, need to modify makefile to send '"'	
+			const char* s = DATE_VARIABLE ;
+			printf("It was compiled on this date: %s. %s\n", s, on);	
+			exit(0);
 		}
 	}
 

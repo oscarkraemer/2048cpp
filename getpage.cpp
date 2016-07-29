@@ -14,7 +14,7 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *use
 */
 using namespace std;
 
-string Getpage::request_page(char* destination, string* data)
+string Getpage::request_page( const char* destination, string* data)
 {
   CURL *curl = curl_easy_init();
   CURLcode res;

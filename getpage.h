@@ -13,7 +13,7 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *use
 class Getpage {
   
   public: 
-    string request_page(char* destination, string* data);
+    string request_page(const char* destination, string* data);
 
   private:
 //    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
