@@ -4,11 +4,40 @@
 #include "getpage.h"
 #include <stdio.h>
 #include <list>
+#include <string>
+#include <unistd.h>
+
+//using namespace std;
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Welcome to a 2048 clone written in C++" << std::endl;
+
+	string url = STANDARD_URL;
 	int size = STANDARD_SIZE;
+	string name = "place holder";
+	int c; 
+	while ((c = getopt (argc, argv, "tsnuh:")) != -1){
+		switch (c)
+		{
+		case 't':
+			printf("%s \n", optarg);
+		case 's':
+			size = atoi(optarg);
+		case 'n':
+			name = string( optarg );
+			printf("n was pressed");
+		case 'u':
+			url = string(optarg);
+			printf("u was pressed");
+		case 'h':
+			printf("this is help");	
+
+		}
+	}
+
+
+
+	std::cout << "Welcome to a 2048 clone written in C++" << std::endl;
 
 	if (argc == 2 && isdigit(*argv[1])){
 		size = atoi (argv[1]) ;
@@ -26,12 +55,12 @@ int main(int argc, char* argv[])
 	else{
 		std::cout << "You are a looser!" << std::endl;
 	}
+/* This is for printing out the log this should be considerd removing since it provides very little value
 	
 	for ( list<string>::iterator i = history.begin(); i!= history.end(); ++i )
 		std::cout << '\n' << *i;
-
 	std::cout << '\n';
-
+*/
 
 #ifdef ONLINE_ENABLED
 // This is what makes the game post the result to a predefined URL. 
@@ -43,8 +72,7 @@ int main(int argc, char* argv[])
         post.append("&size=");
 	post.append(to_string(size));
         post.append( STANDARD_PREFIX ); // This could be removed or add support for something else. 
-	char url[] = STANDARD_URL;
-        string a = p.request_page(url , &post);
+        string a = p.request_page(url.c_str() , &post);
         std::cout << a << std::endl;
 #endif
 	return 0;
