@@ -14,4 +14,4 @@ online: main_online.o game.o getpage.o
 	g++ $(CPPFLAGS) main_online.o game.o getpage.o -o 2048 -lcurl
  
 clean:
-	rm *.o *.gch 2048a
+	rm *.o *.gch 2048
