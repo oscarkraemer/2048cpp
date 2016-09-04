@@ -9,42 +9,60 @@
 
 //using namespace std;
 
+int help(){
+	std::cout << 	" This is the help text: \n\n"
+			" Possible options:\n\n"
+			" -s <size> \tthe game field size <size>x<size>\n\n"
+			" -n <name> \tyour name if you wnat it on the score board\n\n"
+			" -u <URL> \tif the server is located somewhere else than what is set at compile\n\n"
+			" -h Show this text\n\n"
+			" -d Show when it is compiled and if online functionality is enabled\n\n"
+			" -v Verbose mode\n\n";
+	return 0;
+}
+
+
 int main(int argc, char* argv[] )
 {
 
+	const char* s = DATE_VARIABLE;
 	string url = STANDARD_URL;
 	int size = STANDARD_SIZE;
-	string name = "place holder";
+	string name = "place_holder";
 	int c; 
-	while ((c = getopt (argc, argv, "tsnudh:")) != -1){
+	bool verbose = false;
+#ifdef ONLINE_ENABLED 
+	const char* on = "Online is enabled";
+#else
+	const char* on = "Online is disabled";
+#endif
+	// Leson: you can't use '"' around a defined variable, need to modify makefile to send '"'	
+	while ((c = getopt (argc, argv, "n:u:dhs:v")) != -1){
 		switch (c)
 		{
-		case 't':
-			printf("%s \n", optarg);
 		case 's':
 			size = atoi(optarg);
+			continue;
 		case 'n':
 			name = string( optarg );
-			printf("n was pressed");
+			continue;
 		case 'u':
-			url = string(optarg);
-			printf("u was pressed");
+			url =  string( optarg );
+			continue;
 		case 'h':
-			printf("this is help");
+			help();
+			exit(0);
 		case 'd':
-		#ifdef ONLINE_ENABLED 
-			const char* on = "Online is enabled";
-		#else
-			const char* on = "Online is disabled";
-		#endif
- 			// Leson: you can't use '"' around a defined variable, need to modify makefile to send '"'	
-			const char* s = DATE_VARIABLE ;
 			printf("It was compiled on this date: %s. %s\n", s, on);	
 			exit(0);
+		case 'v':
+			printf("It was compiled on this date: %s. %s\n", s, on);
+			printf("The new URL is: %s \n", url.c_str());
+			printf("Name set: %s \n", name.c_str());
+			printf("The new size is: %d \n", size);
+			verbose = true;
 		}
 	}
-
-
 
 	std::cout << "Welcome to a 2048 clone written in C++" << std::endl;
 
@@ -73,6 +91,7 @@ int main(int argc, char* argv[] )
 
 #ifdef ONLINE_ENABLED
 // This is what makes the game post the result to a predefined URL. 
+	printf("Sending...");
         Getpage p; 
         string value = to_string(result); // Convert result (int) 2048 => (string) "2048"
         string post = "points=";
@@ -81,8 +100,12 @@ int main(int argc, char* argv[] )
         post.append("&size=");
 	post.append(to_string(size));
         post.append( STANDARD_PREFIX ); // This could be removed or add support for something else. 
-        string a = p.request_page(url.c_str() , &post);
-        std::cout << a << std::endl;
+	string a = p.request_page(url.c_str() , &post);
+	if (verbose == true){
+        	std::cout << a << std::endl;
+	}
+	printf("...Sent\n");
 #endif
 	return 0;
 }
+
