@@ -6,7 +6,7 @@
 #include <list>
 #include <string>
 #include <unistd.h>
-
+#include <sstream>
 //using namespace std;
 
 int help(){
@@ -15,9 +15,10 @@ int help(){
 			" -s <size> \tthe game field size <size>x<size>\n\n"
 			" -n <name> \tyour name if you wnat it on the score board\n\n"
 			" -u <URL> \tif the server is located somewhere else than what is set at compile\n\n"
-			" -h Show this text\n\n"
-			" -d Show when it is compiled and if online functionality is enabled\n\n"
-			" -v Verbose mode\n\n";
+			" -h \t\tShow this text\n\n"
+			" -d \t\tShow when it is compiled and if online functionality is enabled\n\n"
+			" -v \t\tVerbose mode\n\n"
+			" -o \t\tOfline mode\n\n";
 	return 0;
 }
 
@@ -25,19 +26,21 @@ int help(){
 int main(int argc, char* argv[] )
 {
 
-	const char* s = DATE_VARIABLE;
+	const char* compile_date = DATE_VARIABLE;
 	string url = STANDARD_URL;
 	int size = STANDARD_SIZE;
 	string name = "place_holder";
 	int c; 
 	bool verbose = false;
+	bool testing = false;
+	bool upload = true;
 #ifdef ONLINE_ENABLED 
 	const char* on = "Online is enabled";
 #else
 	const char* on = "Online is disabled";
 #endif
 	// Leson: you can't use '"' around a defined variable, need to modify makefile to send '"'	
-	while ((c = getopt (argc, argv, "n:u:dhs:v")) != -1){
+	while ((c = getopt (argc, argv, "n:u:dhs:vto")) != -1){
 		switch (c)
 		{
 		case 's':
@@ -53,14 +56,21 @@ int main(int argc, char* argv[] )
 			help();
 			exit(0);
 		case 'd':
-			printf("It was compiled on this date: %s. %s\n", s, on);	
+			printf("It was compiled on this date: %s. %s\n", compile_date, on);	
 			exit(0);
 		case 'v':
-			printf("It was compiled on this date: %s. %s\n", s, on);
+			printf("It was compiled on this date: %s. %s\n", compile_date, on);
 			printf("The new URL is: %s \n", url.c_str());
 			printf("Name set: %s \n", name.c_str());
 			printf("The new size is: %d \n", size);
 			verbose = true;
+			continue;
+		case 't':
+			testing = true;
+			continue;
+		case 'o':
+			upload = false;
+			continue;
 		}
 	}
 
@@ -75,7 +85,10 @@ int main(int argc, char* argv[] )
 	}
         list<string> history;
 	Game g;
-	int result = g.startGame(size, &history);
+	int result = 0;
+	if (testing == false ) {
+		result = g.startGame(size, &history);
+	}
 	if (result>=WINNING_INT){
 		std::cout << "Victory!" << std::endl;
 	}
@@ -91,20 +104,20 @@ int main(int argc, char* argv[] )
 
 #ifdef ONLINE_ENABLED
 // This is what makes the game post the result to a predefined URL. 
-	printf("Sending...");
-        Getpage p; 
-        string value = to_string(result); // Convert result (int) 2048 => (string) "2048"
-        string post = "points=";
-	post.append(value);
-	value = to_string(size);
-        post.append("&size=");
-	post.append(to_string(size));
-        post.append( STANDARD_PREFIX ); // This could be removed or add support for something else. 
-	string a = p.request_page(url.c_str() , &post);
-	if (verbose == true){
-        	std::cout << a << std::endl;
+	if( upload ){
+		if ( verbose ){
+			printf("Sending...\n");
+		}
+		std::stringstream ss;
+		ss << "name=" << name << "&points=" << result << "&size=" << size << "&version=" << compile_date << "&prefix=" << STANDARD_PREFIX ;
+		string post = ss.str();
+		Getpage p;
+		string a = p.request_page(url.c_str() , &post);
+		if (verbose ){
+		std::cout << a << std::endl;
+			printf("...Sent\n");
+		}
 	}
-	printf("...Sent\n");
 #endif
 	return 0;
 }
