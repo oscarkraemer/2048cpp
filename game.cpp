@@ -3,17 +3,16 @@
 int Game::startGame(int size, list<string>* history){
 	this->length= size;
 	newBoard(this->length);
+	insertNewNumber();
 	bool gameEnd = false;
-//	bool victory = false;
-	do
-	{
+	string message = "Press up, down, left, right or q for quit";
+	do{
 		insertNewNumber();
 		if (checkIfGameOver() == true){
 			break;
 		}
 		string oldString = uniqString();// This is used to check if a board move have been made.
-
-		string message = "Press up, down, left, right or q for quit";
+		message = "Press up, down, left, right or q for quit";
 		int d = NOT_SET;
 		while (1){
 			PrintBoard();
@@ -31,8 +30,6 @@ int Game::startGame(int size, list<string>* history){
 		}
 	}
 	while(gameEnd==false);
-//	victory = checkIfVictorius();
-
 	PrintBoard();
 	return returnHighestNumber(); 
 }
@@ -50,21 +47,18 @@ string Game::uniqString(){
 }
 
 void Game::newBoard(int size){
-	
 	board = new int*[size];
-
 	for (int i=0; i<size; i++){
 		board[i] = new int[size];
 		for (int j=0; j<size; j++){
 			this->board[i][j]=0;
 		}
 	}
-	insertNewNumber();
 }
 
 int Game::returnRandomPlate(){
 	//TODO: Create a better random
-	srand (time(NULL));
+	srand(time(NULL));
 	int num = rand() % 2 +1;
 	num = pow( 2, num);
 	return  num;
@@ -79,13 +73,9 @@ void Game::PrintBoard(){
 	cout << head << endl;
 	for (int i=0; i<this->length; i++){
 		for (int j=0; j<this->length; j++){
-
-			//COLOUR:
 			string colour = getColourString(this->board[i][j]);
-
-			//You should check out this link 
+			//You should check out this link for colourd output 
 			// http://stackoverflow.com/questions/9158150/colored-output-in-c
-
 			string s = to_string(this->board[i][j]);
 			int slen = s.length();
 			switch (slen){
@@ -102,7 +92,6 @@ void Game::PrintBoard(){
 			if(this->board[i][j]==0){
 				s="    ";
 			}
-
 			cout << "|" << colour << s << "\033[0m";
 		}
 		cout << "|" << endl;
@@ -110,8 +99,7 @@ void Game::PrintBoard(){
 	cout << head << endl;
 }
 
-string Game::getColourString(int num)
-{
+string Game::getColourString(int num){
 	string colour;
 	switch (num){
 	case 2:
@@ -181,27 +169,21 @@ void Game::insertNewNumber(){
 }
 
 bool Game::checkIfGameOver(){
-	for (int i=0; i<this->length; i++)
-	{
-		for (int j=0; j<this->length; j++)
-		{
+	for (int i=0; i<this->length; i++){
+		for (int j=0; j<this->length; j++){
 			if (this->board[i][j]==0){
 				return false;
 			}
 		}
 	}
-
-	for (int i=0; i<this->length; i++)
-	{
-		for (int j=0; j<this->length-1; j++)
-		{
+	for (int i=0; i<this->length; i++){
+		for (int j=0; j<this->length-1; j++){
 			if (this->board[i][j] == this->board[i][j+1]){
 				return false;
 			}else if (this->board[j][i] == this->board[j+1][i]){
 				return false;
 			}
 		}
-
 	}
 	return true;
 }
@@ -283,7 +265,7 @@ int Game::input(string mess){
 		  	system("stty raw");   	// Set terminal to raw mode 
 		}
   	}while (toReturn==NOT_SET);
-  
+
   	system("stty cooked"); 	// Reset terminal to normal "cooked" mode 
   	return toReturn;
 }

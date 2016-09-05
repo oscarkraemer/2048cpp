@@ -22,9 +22,7 @@ int help(){
 	return 0;
 }
 
-
-int main(int argc, char* argv[] )
-{
+int main(int argc, char* argv[] ){
 
 	const char* compile_date = DATE_VARIABLE;
 	string url = STANDARD_URL;
@@ -101,7 +99,6 @@ int main(int argc, char* argv[] )
 		std::cout << '\n' << *i;
 	std::cout << '\n';
 */
-
 #ifdef ONLINE_ENABLED
 // This is what makes the game post the result to a predefined URL. 
 	if( upload ){
@@ -114,7 +111,7 @@ int main(int argc, char* argv[] )
 		Getpage p;
 		string a = p.request_page(url.c_str() , &post);
 		if (verbose ){
-		std::cout << a << std::endl;
+			std::cout << a << std::endl;
 			printf("...Sent\n");
 		}
 	}
