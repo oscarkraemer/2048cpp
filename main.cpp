@@ -18,7 +18,7 @@ int help(){
 			" -h \t\tShow this text\n\n"
 			" -d \t\tShow when it is compiled and if online functionality is enabled\n\n"
 			" -v \t\tVerbose mode\n\n"
-			" -o \t\tOfline mode\n\n";
+			" -o \t\tOffline mode\n\n";
 	return 0;
 }
 

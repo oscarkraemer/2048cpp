@@ -4,3 +4,4 @@ standard.h
 *.o
 *.swp
 *.gch
+.DS_Store
