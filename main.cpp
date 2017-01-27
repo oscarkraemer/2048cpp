@@ -25,18 +25,30 @@ int help(){
 int main(int argc, char* argv[] ){
 
 	const char* compile_date = DATE_VARIABLE;
-	string url = STANDARD_URL;
-	int size = STANDARD_SIZE;
 	string name = "place_holder";
 	int c; 
 	bool verbose = false;
 	bool testing = false;
 	bool upload = true;
+	string url = "place_holder";
+	int size = 4;
+
 #ifdef ONLINE_ENABLED 
 	const char* on = "Online is enabled";
 #else
 	const char* on = "Online is disabled";
 #endif
+
+#ifdef STANDARD_SIZE
+	size = STANDARD_SIZE;
+#endif
+#ifdef STANDARD_URL
+	url = STANDARD_URL;
+#endif
+#ifdef STANDARD_NAME
+	name = STANDARD_NAME;
+#endif
+
 	// Leson: you can't use '"' around a defined variable, need to modify makefile to send '"'	
 	while ((c = getopt (argc, argv, "n:u:dhs:vto")) != -1){
 		switch (c)

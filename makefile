@@ -1,9 +1,10 @@
 CPPFLAGS=-std=c++0x #-Wunused-comparison -lcurl
 DATE_VARIABLE=$(shell date +'"%Y-%m-%dT%H:%M:%S"')
+USER_NAME="$(shell whoami)"
 2048: main.o game.o getpage.o 
 	g++ $(CPPFLAGS) game.o main.o getpage.o -o 2048 -lcurl
 main.o: main.cpp standard.h 
-	g++ $(CPPFLAGS) -DDATE_VARIABLE='$(DATE_VARIABLE)' -c main.cpp 
+	g++ $(CPPFLAGS) -DDATE_VARIABLE='$(DATE_VARIABLE)' -DSTANDARD_NAME='$(USER_NAME)' -c main.cpp
 game.o: game.cpp game.h
 	g++ $(CPPFLAGS) -c game.cpp
 getpage.o: getpage.h getpage.cpp
